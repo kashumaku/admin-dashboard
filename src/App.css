@@ -1,0 +1,38 @@
+
+.dark{
+    background-color: rgb(48, 45, 50);
+    color: wheat;
+
+}
+.light{
+    background-color: rgb(195, 197, 199);
+    color: rgb(13, 1, 23);
+}
+.dark-body{
+    background-color: rgb(11, 3, 16);
+    color: wheat;
+
+}
+.light-body{
+    background-color: aliceblue;
+    color: rgb(13, 1, 23);
+}
+.light-topbar{
+    background-color: rgb(231, 226, 233);
+    color: rgb(25, 24, 21);
+    border-bottom: 1px solid rgb(197, 195, 197);
+}
+.dark-topbar{
+    background-color: rgb(11, 3, 16);
+    color: wheat;
+    border-bottom: 1px solid rgb(54, 52, 54);
+}
+.light-sidebar{
+    background-color: #31355a;
+     color: rgb(244, 242, 239);
+}
+.dark-sidebar{
+    background-color: rgb(30, 29, 30);
+    color: wheat;
+}
+
