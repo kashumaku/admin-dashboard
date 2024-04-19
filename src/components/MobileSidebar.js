@@ -5,7 +5,7 @@ import { MdOutlineArrowRight, MdOutlineArrowDropDown } from "react-icons/md";
 import logo from "../images/logo.jpg";
 import { Link } from "react-router-dom";
 import { themeContext } from "../context/ThemeContext";
-const Sidebar = ({ showSidebar }) => {
+const MobileSidebar = ({ showSidebar, setShowSidebar }) => {
   const { theme } = useContext(themeContext);
   const [selectedMenu, setSelectedMenu] = useState("Dashboard");
   const [visibleSubmenu, setVisibleSubmenu] = useState("");
@@ -21,9 +21,9 @@ const Sidebar = ({ showSidebar }) => {
   return (
     <div
       className={`${theme === "dark" ? "dark-sidebar" : "light-sidebar"} ${
-        showSidebar ? "w-56 " : "w-0 "
+        showSidebar ? "w-56 duration-[.5s]" : "w-0 duration-[.5s]"
       } h-screen pb-5  flex flex-col gap-4
-      overflow-y-scroll max-md:hidden`}
+      overflow-y-scroll fixed md:hidden`}
     >
       {/* logo */}
       <div
@@ -40,11 +40,12 @@ const Sidebar = ({ showSidebar }) => {
           onClick={(e) => {
             handleSelect(e, menu.title);
             handleVisible(e, menu.title);
+            !menu?.subMenu && setShowSidebar(false);
           }}
           className="pl-5 pb-2 border-b border-gray-700"
         >
           <Link
-            to={!menu?.subMenu ? menu.path : "#"}
+            to={!menu?.subMenu ? menu.path : ""}
             className={`flex gap-2 items-center rounded-l-md  ${
               selectedMenu === menu.title &&
               !menu?.subMenu &&
@@ -63,7 +64,7 @@ const Sidebar = ({ showSidebar }) => {
             {/* visiblity control icons */}
             <div className="cursor-pointer">
               {visibleSubmenu === menu.title
-                ? menu?.subMenu?.length > 0 && (
+                ? menu.subMenu && (
                     <MdOutlineArrowDropDown
                       size={24}
                       onClick={(e) => handleVisible(e, "")}
@@ -84,7 +85,10 @@ const Sidebar = ({ showSidebar }) => {
               <div key={subMenu.title}>
                 <Link
                   to={subMenu.path}
-                  onClick={(e) => handleSelect(e, subMenu.title)}
+                  onClick={(e) => {
+                    handleSelect(e, subMenu.title);
+                    setShowSidebar(false);
+                  }}
                   className={`text-base my-2 font-semibold block ${
                     selectedMenu === subMenu.title &&
                     "rounded-l-md bg-[#f7557c] w-[100%] p-3"
@@ -101,4 +105,4 @@ const Sidebar = ({ showSidebar }) => {
   );
 };
 
-export default Sidebar;
+export default MobileSidebar;

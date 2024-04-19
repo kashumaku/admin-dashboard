@@ -6,7 +6,7 @@ import { LuUser2 } from "react-icons/lu";
 import { TbLockCheck } from "react-icons/tb";
 
 import bgimage from "../images/bg image.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./login.css";
@@ -18,7 +18,6 @@ const Register = () => {
   const [credentials, setCredentials] = useState({});
 
   const [inputType, setInputType] = useState("password");
-  const navigate = useNavigate();
 
   const handleCreate = () => {
     console.log(credentials);
@@ -132,7 +131,7 @@ const Register = () => {
             className="flex-1 text-lg outline-none"
           />
           {/* password visiblity controls */}
-          {inputType == "password" ? (
+          {inputType === "password" ? (
             <FaEyeSlash
               size={24}
               color="gray"
@@ -172,16 +171,16 @@ const Register = () => {
           {/* animating lines */}
           <h1 className="title">Welcome To E-Gebeya Admin Dashboard</h1>
           <div className="item item1">
-            <h2 className="line" />
-            <h1 className="circle" />
+            <div className="line" />
+            <div className="circle" />
           </div>
           <div className="item item2">
-            <h2 className="line" />
-            <h1 className="circle" />
+            <div className="line" />
+            <div className="circle" />
           </div>
           <div className="item item3">
-            <h2 className="line" />
-            <h1 className="circle" />
+            <div className="line" />
+            <div className="circle" />
           </div>
           <p className="desc">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque ipsum

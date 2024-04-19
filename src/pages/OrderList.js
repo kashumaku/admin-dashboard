@@ -5,15 +5,15 @@ import { BsThreeDots } from "react-icons/bs";
 import { IoIosSearch } from "react-icons/io";
 import { themeContext } from "../context/ThemeContext";
 
-const Customers = () => {
+const OrderList = () => {
   const { theme } = useContext(themeContext);
-  const [customers, setCustomers] = useState([]);
+  const [products, setProducts] = useState([]);
   const [focused, setFocused] = useState(false);
   const [pages, setPages] = useState(10);
 
   const fetchData = async () => {
-    const res = await axios.get("https://fakestoreapi.com/users");
-    setCustomers(res.data);
+    const res = await axios.get("https://fakestoreapi.com/products");
+    setProducts(res.data);
   };
   useEffect(() => {
     fetchData();
@@ -22,9 +22,9 @@ const Customers = () => {
     <div className="p-5 pb-32">
       {/* header */}
       <p className="flex justify-between pb-5">
-        <h1 className="text-3xl font-semibold">Customer list</h1>
+        <h1 className="text-3xl font-semibold">Order list</h1>
         <button className="bg-yellow-500 py-2 px-3 text-gray-800 font-semibold">
-          New Product
+          Export
         </button>
       </p>
       {/*  main*/}
@@ -54,54 +54,63 @@ const Customers = () => {
             />
           </p>
         </div>
-        {/* Customer list */}
+        {/* product list */}
         <div>
-          {/* Customer header */}
+          {/* product header */}
           <ul
             className={`flex  p-4 gap-5 font-semibold border-b  ${
               theme === "dark" ? "border-gray-600" : "border-gray-200"
             }`}
           >
-            <li className="w-1/5  ">Name</li>
-            <li className="w-1/5">Phone</li>
-            <li className="w-1/5">Email</li>
-            <li className="w-1/5 ">Address</li>
-            <li className="w-1/5">Action</li>
+            <li className="w-3/6  ">Product</li>
+            <li className="w-1/6  ">Category</li>
+            <li className="w-1/6">Quantity</li>
+            <li className="w-1/6">Total Price ETB</li>
+            <li className="w-1/6">Status</li>
+            <li className="w-1/6">Action</li>
           </ul>
           {/* products */}
-          {customers.map((customer) => (
-            <ul
-              key={customer.id}
-              className={`flex px-4 py-1 gap-4 border-b ${
-                theme === "dark" ? "border-gray-600" : "border-gray-200"
-              }`}
-            >
-              <li className="w-1/5 flex items-center gap-3 capitalize ">
-                {customer.name.firstname + " " + customer.name.lastname}
-              </li>
-              <li className="w-1/5  ">{customer.phone}</li>
+          {products.map((product) => {
+            const quantity = Math.floor(Math.random() * 10) + 1;
+            return (
+              <ul
+                key={product.id}
+                className={`flex px-4 py-2 gap-4 border-b ${
+                  theme === "dark" ? "border-gray-600" : "border-gray-200"
+                }`}
+              >
+                <li className="w-3/6 flex items-center gap-3  ">
+                  <img
+                    src={product.image}
+                    alt=""
+                    className="w-14 h-14 rounded-lg object-cover"
+                  />
+                  <p className="flex flex-col">
+                    <span>{product.title}</span>
+                    <span>ID:{product.id}</span>
+                  </p>
+                </li>
+                <li className="w-1/6  ">{product.category}</li>
 
-              <li className="w-1/5">{customer.email}</li>
-              <li className="w-1/5 ">
-                <p className=" ">
-                  <span className=" font-semibold">City</span>:{" "}
-                  {customer.address.city}
-                </p>
-                <p className=" ">
-                  <span className=" font-semibold">Street</span>:{" "}
-                  {customer.address.street}
-                </p>
-                <p className=" ">
-                  <span className=" font-semibold">House no. </span>:{" "}
-                  {customer.address.number}
-                </p>
-              </li>
-
-              <li className="w-1/5 ">
-                <BsThreeDots />
-              </li>
-            </ul>
-          ))}
+                <li className="w-1/6">{quantity}</li>
+                <li className="w-1/6 ">{product.price * quantity}</li>
+                <li className={`w-1/6`}>
+                  <span
+                    className={`text-white px-3 py-1 rounded-full ${
+                      quantity % 2 === 0
+                        ? "bg-orange-400/50"
+                        : "bg-green-400/50"
+                    }`}
+                  >
+                    {quantity % 2 === 0 ? "Pending" : "Delivered"}
+                  </span>
+                </li>
+                <li className="w-1/6 ">
+                  <BsThreeDots />
+                </li>
+              </ul>
+            );
+          })}
         </div>
         {/* setting */}
         <div className="flex justify-between items-center p-5 bg-gray-300">
@@ -131,4 +140,4 @@ const Customers = () => {
   );
 };
 
-export default Customers;
+export default OrderList;

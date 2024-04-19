@@ -11,14 +11,14 @@ import TopSellingProducts from "../components/dashboard/TopSellingProducts";
 const data = [
   {
     id: 1,
-    icon: <FcSalesPerformance size={30} />,
+    icon: <FcSalesPerformance size={30} color="green" />,
     title: "Total Sales",
     amount: 32000,
     percentage: 45,
   },
   {
     id: 2,
-    icon: <FaDollarSign size={30} />,
+    icon: <FaDollarSign size={30} color="orange" />,
     title: "Total Revenue",
     amount: 12000,
     percentage: 82,
@@ -38,7 +38,7 @@ const Dashboard = () => {
     <div className="p-5 pb-24">
       {/* top */}
       <div className="flex justify-between">
-        <h1 className="text-3xl font-semibold">Dashboard</h1>
+        <h1 className="text-xl md:text-3xl font-semibold">Dashboard</h1>
         <p className="flex gap-5">
           <input
             type="date"
@@ -52,11 +52,11 @@ const Dashboard = () => {
         </p>
       </div>
       {/* main */}
-      <div className="grid grid-cols-3 mt-5 gap-5">
+      <div className="md:grid md:grid-cols-3 mt-5 gap-5">
         {/* left */}
         <div className="col-span-2 flex flex-col gap-5">
           {/* top cards */}
-          <div className=" flex justify-between ">
+          <div className=" flex justify-between gap-2 ">
             <Card bg="#aaa" data={data[0]} />
             <Card bg="#bbd" data={data[1]} />
             <Card bg="#ccc" data={data[2]} />
@@ -67,7 +67,7 @@ const Dashboard = () => {
           <TopSellingProducts theme={theme} />
         </div>
         {/* right */}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 max-md:mt-5">
           <TopRevenue theme={theme} />
           <RecentOrder theme={theme} />
         </div>

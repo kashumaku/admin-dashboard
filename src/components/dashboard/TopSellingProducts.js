@@ -51,11 +51,13 @@ const data = [
 const TopSellingProducts = ({ theme }) => {
   return (
     <div
-      className={`flex-1  p-5 rounded-lg ${theme == "dark" ? "dark" : "light"}`}
+      className={`flex-1 px-2  py-5 rounded-lg ${
+        theme === "dark" ? "dark" : "light"
+      }`}
     >
       <h1 className="text-2xl font-semibold mb-3">Top selling products</h1>
       {/* header */}
-      <ul className="flex  text-xl  bg-gray-700/50 font-semibold gap-3">
+      <ul className="flex  text-xl  border-b border-gray-400  font-semibold gap-3">
         <li className="flex-1 ">Product</li>
         <li className="flex-1 ">Price</li>
         <li className="flex-1 ">Stock</li>
@@ -65,7 +67,11 @@ const TopSellingProducts = ({ theme }) => {
       {data.map((d) => (
         <div key={d.id} className="flex my-5 gap-3">
           <p className="flex gap-4 flex-1 ">
-            <img src={d.image} alt="" className="w-14 h-10 object-cover" />
+            <img
+              src={d.image}
+              alt=""
+              className="hidden lg:block w-14 h-10 object-cover "
+            />
             <h2 className="text-sm">{d.name}</h2>
           </p>
           <p className="flex-1 ">{d.price} ETB</p>

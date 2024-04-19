@@ -26,6 +26,9 @@ const Login = () => {
       toast.error("Something went wrong. Please try again");
     }
   };
+  const handleKeyDown = (e) => {
+    if (e.code === "Enter") handleLogin();
+  };
   return (
     <div className="flex h-screen bg-orange-100 text-gray-700  ">
       <ToastContainer />
@@ -41,7 +44,7 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             type="text"
             placeholder="Email Address"
-            className="flex-1 text-lg"
+            className="flex-1 text-lg outline-none"
           />
         </p>
         {/* password */}
@@ -49,13 +52,14 @@ const Login = () => {
           <MdLockPerson size={30} color="gray" />
           <input
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleKeyDown}
             value={password}
             type={inputType}
             placeholder="Password"
-            className="flex-1 text-lg"
+            className="flex-1 text-lg outline-none"
           />
           {/* password visiblity controls */}
-          {inputType == "password" ? (
+          {inputType === "password" ? (
             <FaEyeSlash
               size={24}
               color="gray"
@@ -89,22 +93,22 @@ const Login = () => {
         </Link>
       </div>
       {/* right */}
-      <div className="container flex-1">
+      <div className="hidden md:block  container  flex-1">
         {/* Overlay */}
         <div className="overlay">
           {/* animating lines */}
           <h1 className="title">Welcome To E-Gebeya Admin Dashboard</h1>
           <div className="item item1">
-            <h2 className="line" />
-            <h1 className="circle" />
+            <div className="line" />
+            <div className="circle" />
           </div>
           <div className="item item2">
-            <h2 className="line" />
-            <h1 className="circle" />
+            <div className="line" />
+            <div className="circle" />
           </div>
           <div className="item item3">
-            <h2 className="line" />
-            <h1 className="circle" />
+            <div className="line" />
+            <div className="circle" />
           </div>
           <p className="desc">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque ipsum

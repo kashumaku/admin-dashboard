@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import Topbar from "../components/topbar";
 import { Outlet } from "react-router-dom";
 import { themeContext } from "../context/ThemeContext";
+import MobileSidebar from "../components/MobileSidebar";
 
 const Home = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -10,6 +11,11 @@ const Home = () => {
   return (
     <div className="flex h-[100%] ">
       <Sidebar showSidebar={showSidebar} />
+
+      <MobileSidebar
+        showSidebar={showSidebar}
+        setShowSidebar={setShowSidebar}
+      />
       <div className="w-full h-[100%]">
         <Topbar setShowSidebar={setShowSidebar} />
         {/* Outlet */}

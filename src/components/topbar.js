@@ -19,15 +19,15 @@ const Topbar = ({ setShowSidebar }) => {
           <IoIosSearch size={24} color="gray" />
           <input
             placeholder="Search..."
-            className="bg-gray-300 outline-none text-lg"
+            className="bg-gray-300 outline-none text-lg max-md:w-[80px]"
           />
         </div>
         {/* Theme toggler */}
         <ToggleTheme />
       </div>
       {/* right */}
-      <div className="flex items-center gap-3">
-        <img src={ethiopia} alt="" className="w-8 h-5" />
+      <div className="flex items-center gap-3 ml-2">
+        <img src={ethiopia} alt="" className="hidden md:block w-8 h-5" />
         {/* notification */}
         <div className="relative ">
           <IoIosNotifications size={30} />
@@ -45,7 +45,7 @@ const Topbar = ({ setShowSidebar }) => {
             alt=""
             className="w-14 h-14 rounded-full object-cover"
           />
-          <div>
+          <div className="hidden md:block">
             <p className="text-gray-500">Kassahun Melaku</p>
             <p className="text-gray-400">kassahun@gmail.com</p>
           </div>

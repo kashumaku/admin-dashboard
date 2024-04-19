@@ -43,7 +43,7 @@ const data = [
 const RecentOrder = ({ theme }) => {
   return (
     <div
-      className={`flex-1 p-5 rounded-lg ${theme == "dark" ? "dark" : "light"}`}
+      className={`flex-1 p-5 rounded-lg ${theme === "dark" ? "dark" : "light"}`}
     >
       {/* header */}
       <div className="flex justify-between">

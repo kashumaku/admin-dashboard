@@ -1,16 +1,16 @@
 
 .dark{
     background-color: rgb(48, 45, 50);
-    color: wheat;
+    color: rgb(249, 249, 247);
 
 }
 .light{
-    background-color: rgb(195, 197, 199);
+    background-color: rgb(255, 255, 255);
     color: rgb(13, 1, 23);
 }
 .dark-body{
     background-color: rgb(11, 3, 16);
-    color: wheat;
+    color: rgb(248, 247, 247);
 
 }
 .light-body{
@@ -24,7 +24,7 @@
 }
 .dark-topbar{
     background-color: rgb(11, 3, 16);
-    color: wheat;
+    color: rgb(247, 246, 243);
     border-bottom: 1px solid rgb(54, 52, 54);
 }
 .light-sidebar{
@@ -33,6 +33,6 @@
 }
 .dark-sidebar{
     background-color: rgb(30, 29, 30);
-    color: wheat;
+    color: rgb(252, 252, 251);
 }
 

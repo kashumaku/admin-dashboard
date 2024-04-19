@@ -36,12 +36,12 @@ export const sidebarMenu = [
   {
     title: "Orders",
     icon: (size, color) => <IoMdCart size={size} color={color} />,
-    path: "/home",
+    path: "",
     subMenu: [
       {
         title: "Order List",
         icon: "home",
-        path: "/home",
+        path: "/admin/dashboard/orders",
       },
       {
         title: "Order Details",
