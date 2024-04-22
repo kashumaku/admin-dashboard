@@ -35,7 +35,7 @@ const Dashboard = () => {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
   return (
-    <div className="p-5 pb-24">
+    <div className="p-5 pb-24 overflow-hidden">
       {/* top */}
       <div className="flex justify-between">
         <h1 className="text-xl md:text-3xl font-semibold">Dashboard</h1>

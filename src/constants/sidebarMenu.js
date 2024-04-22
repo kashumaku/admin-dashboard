@@ -87,12 +87,12 @@ export const sidebarMenu = [
   {
     title: "Calendar",
     icon: (size, color) => <FaCalendarAlt size={size} color={color} />,
-    path: "/home",
+    path: "/admin/dashboard/calendar",
   },
   {
     title: "Analytics",
     icon: (size, color) => <SiSimpleanalytics size={size} color={color} />,
-    path: "/home",
+    path: "/admin/dashboard/analytics",
   },
   {
     title: "Settings",

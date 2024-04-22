@@ -8,16 +8,26 @@ import { themeContext } from "../context/ThemeContext";
 const Customers = () => {
   const { theme } = useContext(themeContext);
   const [customers, setCustomers] = useState([]);
+  const [customerName, setCustomerName] = useState("");
   const [focused, setFocused] = useState(false);
   const [pages, setPages] = useState(10);
 
-  const fetchData = async () => {
+  const fetchData = async (customerName) => {
     const res = await axios.get("https://fakestoreapi.com/users");
+    if (customerName) {
+      return setCustomers(
+        customers.filter((c) =>
+          `${c.name.firstname} " " ${c.name.lastname}`
+            .toLowerCase()
+            .includes(customerName.toLowerCase())
+        )
+      );
+    }
     setCustomers(res.data);
   };
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(customerName);
+  }, [customerName]);
   return (
     <div className="p-5 pb-32">
       {/* header */}
@@ -47,6 +57,7 @@ const Customers = () => {
           >
             <IoIosSearch size={24} color="gray" />
             <input
+              onChange={(e) => setCustomerName(e.target.value)}
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
               placeholder="Search product"
@@ -65,43 +76,52 @@ const Customers = () => {
             <li className="w-1/5  ">Name</li>
             <li className="w-1/5">Phone</li>
             <li className="w-1/5">Email</li>
-            <li className="w-1/5 ">Address</li>
+            <li className="w-1/5 hidden md:block">Address</li>
             <li className="w-1/5">Action</li>
           </ul>
           {/* products */}
-          {customers.map((customer) => (
-            <ul
-              key={customer.id}
-              className={`flex px-4 py-1 gap-4 border-b ${
-                theme === "dark" ? "border-gray-600" : "border-gray-200"
-              }`}
-            >
-              <li className="w-1/5 flex items-center gap-3 capitalize ">
-                {customer.name.firstname + " " + customer.name.lastname}
-              </li>
-              <li className="w-1/5  ">{customer.phone}</li>
+          {customers.length === 0 ? (
+            <h1>No search result</h1>
+          ) : (
+            customers.map((customer) => (
+              <ul
+                key={customer.id}
+                className={`flex px-4 py-1 gap-5 border-b ${
+                  theme === "dark" ? "border-gray-600" : "border-gray-200"
+                }`}
+              >
+                <li className="w-1/5 flex items-center gap-3 capitalize ">
+                  {customer.name.firstname + " " + customer.name.lastname}
+                </li>
+                <li className="w-1/5  ">{customer.phone}</li>
 
-              <li className="w-1/5">{customer.email}</li>
-              <li className="w-1/5 ">
-                <p className=" ">
-                  <span className=" font-semibold">City</span>:{" "}
-                  {customer.address.city}
-                </p>
-                <p className=" ">
-                  <span className=" font-semibold">Street</span>:{" "}
-                  {customer.address.street}
-                </p>
-                <p className=" ">
-                  <span className=" font-semibold">House no. </span>:{" "}
-                  {customer.address.number}
-                </p>
-              </li>
+                <li
+                  className="w-1/5 text-wrap overflow-ellipsis overflow-hidden
+                 hover:overflow-visible hover:bg-green-100 hover:w-fit "
+                >
+                  {customer.email}
+                </li>
+                <li className="w-1/5 hidden md:block ">
+                  <p className=" ">
+                    <span className=" font-semibold">City</span>:{" "}
+                    {customer.address.city}
+                  </p>
+                  <p className=" ">
+                    <span className=" font-semibold">Street</span>:{" "}
+                    {customer.address.street}
+                  </p>
+                  <p className=" ">
+                    <span className=" font-semibold">House no. </span>:{" "}
+                    {customer.address.number}
+                  </p>
+                </li>
 
-              <li className="w-1/5 ">
-                <BsThreeDots />
-              </li>
-            </ul>
-          ))}
+                <li className="w-1/5 ">
+                  <BsThreeDots />
+                </li>
+              </ul>
+            ))
+          )}
         </div>
         {/* setting */}
         <div className="flex justify-between items-center p-5 bg-gray-300">
@@ -115,7 +135,7 @@ const Customers = () => {
             </p>
             <button className="font-medium text-gray-800">Next</button>
           </p>
-          <p className="flex gap-4">
+          <p className="gap-4 hidden md:flex text-black">
             <span className="mr-5">Showing 1 to 10 of 46</span>
             <span>Rows per page</span>
             <input

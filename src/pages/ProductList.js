@@ -10,21 +10,31 @@ import { Link } from "react-router-dom";
 const ProductList = () => {
   const { theme } = useContext(themeContext);
   const [products, setProducts] = useState([]);
+  const [productName, setProductName] = useState("");
   const [focused, setFocused] = useState(false);
   const [actionSelectedId, setActionSelectedId] = useState(-1);
   const [pages, setPages] = useState(10);
-  const fetchData = async () => {
+
+  const fetchData = async (productName) => {
     const res = await axios.get("https://fakestoreapi.com/products");
+    if (productName) {
+      return setProducts(
+        res.data.filter((d) =>
+          d.title.toLowerCase().includes(productName.toLowerCase())
+        )
+      );
+    }
     setProducts(res.data);
   };
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(productName);
+    console.log(products);
+  }, [productName]);
 
   return (
-    <div className="p-5 pb-32">
+    <div className="pb-32 md:p-5 ">
       {/* header */}
-      <p className="flex justify-between pb-5">
+      <p className="flex justify-between p-5">
         <h1 className="text-3xl font-semibold">ProductList list</h1>
         <Link
           to="/admin/dashboard/new-product"
@@ -53,6 +63,7 @@ const ProductList = () => {
           >
             <IoIosSearch size={24} color="gray" />
             <input
+              onChange={(e) => setProductName(e.target.value)}
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
               placeholder="Search product"
@@ -72,56 +83,60 @@ const ProductList = () => {
             <li className="w-1/6  ">Category</li>
             <li className="w-1/6">Stock</li>
             <li className="w-1/6">Price</li>
-            <li className="w-1/6">Rating</li>
+            <li className="w-1/6 hidden md:block">Rating</li>
             <li className="w-1/6">Action</li>
           </ul>
           {/* products */}
-          {products.map((product) => (
-            <ul
-              key={product.id}
-              className={`flex px-4 py-2 gap-4 border-b ${
-                theme === "dark" ? "border-gray-600" : "border-gray-200"
-              } ${actionSelectedId === product.id ? "bg-blue-300" : ""}`}
-            >
-              <li className="w-3/6 flex items-center gap-3  ">
-                <img
-                  src={product.image}
-                  alt=""
-                  className="w-14 h-14 object-cover rounded-lg"
-                />
-                <p className="flex flex-col">
-                  <span>{product.title}</span>
-                  <span>ID:{product.id}</span>
-                </p>
-              </li>
-              <li className="w-1/6  ">{product.category}</li>
-              <li className="w-1/6">24 in stock</li>
-              <li className="w-1/6 ">{product.price}</li>
-              <li className="w-1/6">
-                <span>{product.rating.rate}</span>
-              </li>
-              {/* action */}
-              <li className="w-1/6  hover:text-yellow-300 relative ">
-                <BsThreeDots
-                  size={25}
-                  onClick={() => setActionSelectedId(product.id)}
-                />
-                <div
-                  className={` ${
-                    actionSelectedId === product.id
-                      ? "block absolute top-0 z-10"
-                      : "hidden"
-                  }`}
-                >
-                  <Action
-                    item={product}
-                    dataType="products"
-                    hideAction={setActionSelectedId}
+          {products.length === 0 ? (
+            <h1>No search result</h1>
+          ) : (
+            products.map((product) => (
+              <ul
+                key={product.id}
+                className={`flex px-4 py-2 gap-4 border-b ${
+                  theme === "dark" ? "border-gray-600" : "border-gray-200"
+                } ${actionSelectedId === product.id ? "bg-blue-300" : ""}`}
+              >
+                <li className="w-3/6 flex items-center gap-3  ">
+                  <img
+                    src={product.image}
+                    alt=""
+                    className="w-14 h-14 object-cover rounded-lg hidden md:block"
                   />
-                </div>
-              </li>
-            </ul>
-          ))}
+                  <p className="flex flex-col">
+                    <span>{product.title}</span>
+                    <span>ID:{product.id}</span>
+                  </p>
+                </li>
+                <li className="w-1/6  ">{product.category}</li>
+                <li className="w-1/6">24 in stock</li>
+                <li className="w-1/6 ">{product.price}</li>
+                <li className="w-1/6 hidden md:block">
+                  <span>{product.rating.rate}</span>
+                </li>
+                {/* action */}
+                <li className="w-1/6  hover:text-yellow-300 relative ">
+                  <BsThreeDots
+                    size={25}
+                    onClick={() => setActionSelectedId(product.id)}
+                  />
+                  <div
+                    className={` ${
+                      actionSelectedId === product.id
+                        ? "block absolute top-0 right-0 z-10"
+                        : "hidden"
+                    }`}
+                  >
+                    <Action
+                      item={product}
+                      dataType="products"
+                      hideAction={setActionSelectedId}
+                    />
+                  </div>
+                </li>
+              </ul>
+            ))
+          )}
         </div>
         {/* setting */}
         <div className="flex justify-between items-center p-5 bg-gray-300">

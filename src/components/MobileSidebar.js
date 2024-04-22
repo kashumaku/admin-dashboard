@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 
 import { sidebarMenu } from "../constants/sidebarMenu";
 import { MdOutlineArrowRight, MdOutlineArrowDropDown } from "react-icons/md";
+import { IoCloseSharp } from "react-icons/io5";
+
 import logo from "../images/logo.jpg";
 import { Link } from "react-router-dom";
 import { themeContext } from "../context/ThemeContext";
@@ -23,11 +25,18 @@ const MobileSidebar = ({ showSidebar, setShowSidebar }) => {
       className={`${theme === "dark" ? "dark-sidebar" : "light-sidebar"} ${
         showSidebar ? "w-56 duration-[.5s]" : "w-0 duration-[.5s]"
       } h-screen pb-5  flex flex-col gap-4
-      overflow-y-scroll fixed md:hidden`}
+      overflow-y-scroll fixed md:hidden z-20`}
     >
+      {/* close icon */}
+      <IoCloseSharp
+        onClick={() => setShowSidebar(false)}
+        size={35}
+        fill="red"
+        className="absolute top-3 right-3 bg-white rounded-full"
+      />
       {/* logo */}
       <div
-        className="border-2 border-gray-600 rounded-b-lg shadow-lg flex
+        className=" shadow-lg flex
        flex-col justify-center items-center  p-5"
       >
         <img src={logo} alt="" className="w-[100px] h-[100px] rounded-full" />
@@ -45,7 +54,7 @@ const MobileSidebar = ({ showSidebar, setShowSidebar }) => {
           className="pl-5 pb-2 border-b border-gray-700"
         >
           <Link
-            to={!menu?.subMenu ? menu.path : ""}
+            to={!menu?.subMenu ? menu.path : "#"}
             className={`flex gap-2 items-center rounded-l-md  ${
               selectedMenu === menu.title &&
               !menu?.subMenu &&

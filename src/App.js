@@ -9,6 +9,8 @@ import "./App.css";
 import Setting from "./pages/Setting";
 import OrderList from "./pages/OrderList";
 import NewProduct from "./pages/NewProduct";
+import Calendar from "./pages/Calendar";
+import Analysis from "./pages/Analysis";
 
 function App() {
   return (
@@ -27,7 +29,9 @@ function App() {
             />
             <Route path="/admin/dashboard/orders" element={<OrderList />} />
             <Route path="/admin/dashboard/customers" element={<Customers />} />
+            <Route path="/admin/dashboard/calendar" element={<Calendar />} />
             <Route path="/admin/dashboard/register" element={<Register />} />
+            <Route path="/admin/dashboard/analytics" element={<Analysis />} />
             <Route path="/admin/dashboard/settings" element={<Setting />} />
           </Route>
         </Routes>

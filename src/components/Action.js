@@ -7,7 +7,8 @@ const Action = ({ item, dataType, hideAction }) => {
   return (
     <ul
       className=" bg-gray-100 text-gray-800
-     font-semibold shadow-md py-3 flex flex-col gap-2 border border-gray-300 rounded-b-xl rounded-tr-xl"
+     font-semibold shadow-md py-3 flex flex-col gap-2
+      border border-gray-300 rounded-b-xl rounded-tr-xl"
     >
       {dataType !== "customers" && (
         <li className="text-green-500 px-4 cursor-pointer">Edit</li>

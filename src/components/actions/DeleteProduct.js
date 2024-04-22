@@ -6,7 +6,7 @@ const DeleteProduct = ({ item, setDeleteRequest, hideAction }) => {
     setDeleteRequest(false);
   };
   return (
-    <div className="fixed top-0 left-0 flex items-center justify-center bg-black/80 w-screen h-screen">
+    <div className="fixed top-0 left-0 flex items-center justify-center px-5 bg-black/80 w-screen h-screen">
       <div className="bg-gray-500 text-white p-5 rounded-lg">
         <h1>Do You want to delete </h1>
         <p>{item.title} </p>

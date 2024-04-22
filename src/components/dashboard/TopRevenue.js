@@ -1,10 +1,13 @@
-import piechart from "../../images/piechart.png";
+import Piechart from "../../charts/Pie";
+// import piechart from "../../images/piechart.png";
 
 const TopRevenue = ({ theme }) => {
   return (
     <div className={`p-5 rounded-lg ${theme === "dark" ? "dark" : "light"}`}>
       <h1 className="text-2xl font-semibold mb-3">Top Revenue products</h1>
-      <img src={piechart} alt="" />
+      {/* <img src={piechart} alt="" /> */}
+      <Piechart />
+
       {/*chart description */}
       <section className="flex gap-5 flex-wrap mt-5">
         <p>

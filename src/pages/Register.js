@@ -165,7 +165,7 @@ const Register = () => {
         </Link> */}
       </div>
       {/* right */}
-      <div className="container flex-1">
+      <div className="container hidden md:block flex-1">
         {/* Overlay */}
         <div className="overlay">
           {/* animating lines */}

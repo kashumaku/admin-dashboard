@@ -21,7 +21,7 @@ const Sidebar = ({ showSidebar }) => {
   return (
     <div
       className={`${theme === "dark" ? "dark-sidebar" : "light-sidebar"} ${
-        showSidebar ? "w-56 " : "w-0 "
+        showSidebar ? "w-64 " : "w-0 "
       } h-screen pb-5  flex flex-col gap-4
       overflow-y-scroll max-md:hidden`}
     >

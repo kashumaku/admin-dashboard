@@ -19,9 +19,9 @@ const OrderList = () => {
     fetchData();
   }, []);
   return (
-    <div className="p-5 pb-32">
+    <div className=" pb-32 md:p-5">
       {/* header */}
-      <p className="flex justify-between pb-5">
+      <p className="flex justify-between p-5">
         <h1 className="text-3xl font-semibold">Order list</h1>
         <button className="bg-yellow-500 py-2 px-3 text-gray-800 font-semibold">
           Export
@@ -58,11 +58,11 @@ const OrderList = () => {
         <div>
           {/* product header */}
           <ul
-            className={`flex  p-4 gap-5 font-semibold border-b  ${
+            className={`flex  gap-3 px-3 font-semibold border-b  ${
               theme === "dark" ? "border-gray-600" : "border-gray-200"
             }`}
           >
-            <li className="w-3/6  ">Product</li>
+            <li className="w-3/6 ">Product</li>
             <li className="w-1/6  ">Category</li>
             <li className="w-1/6">Quantity</li>
             <li className="w-1/6">Total Price ETB</li>
@@ -75,15 +75,15 @@ const OrderList = () => {
             return (
               <ul
                 key={product.id}
-                className={`flex px-4 py-2 gap-4 border-b ${
+                className={` flex gap-3 px-3 py-2 border-b even:bg-gray-100 ${
                   theme === "dark" ? "border-gray-600" : "border-gray-200"
                 }`}
               >
-                <li className="w-3/6 flex items-center gap-3  ">
+                <li className=" w-3/6 flex items-center gap-3  ">
                   <img
                     src={product.image}
                     alt=""
-                    className="w-14 h-14 rounded-lg object-cover"
+                    className="w-14 h-14 rounded-lg object-cover hidden md:block"
                   />
                   <p className="flex flex-col">
                     <span>{product.title}</span>
@@ -93,10 +93,12 @@ const OrderList = () => {
                 <li className="w-1/6  ">{product.category}</li>
 
                 <li className="w-1/6">{quantity}</li>
-                <li className="w-1/6 ">{product.price * quantity}</li>
+                <li className="w-1/6 ">
+                  {Math.floor(product.price * quantity)}
+                </li>
                 <li className={`w-1/6`}>
                   <span
-                    className={`text-white px-3 py-1 rounded-full ${
+                    className={`text-white overflow-hidden overflow-ellipsis block max-w-fit rounded-full px-1  ${
                       quantity % 2 === 0
                         ? "bg-orange-400/50"
                         : "bg-green-400/50"
